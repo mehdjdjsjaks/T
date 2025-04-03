@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axcel AI Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Axcel AI</h1>
+        </div>
+        <div class="chat-box" id="chat-box">
+            <div class="message bot-message">سلام! من Axcel AI هستم. چطور می‌توانم به شما کمک کنم؟</div>
+        </div>
+        <input type="text" id="user-input" placeholder="پیام خود را اینجا وارد کنید..." />
+        <button id="send-button">ارسال</button>
+    </div>
+
+    <script>
+        const responses = {
+            "سلام": "سلام! چطور هستید؟",
+            "خوبم": "خوشحالم که خوب هستید!",
+            "چطوری؟": "من خوبم، ممنون که پرسیدید!",
+            "اسم تو چیه؟": "من Axcel AI هستم.",
+            "چند سالته؟": "من یک برنامه هستم و سن ندارم!",
+            "چه کمکی می‌تونی بکنی؟": "من می‌توانم به سوالات شما پاسخ دهم.",
+            "وقت خوبی داشته باشی": "متشکرم! شما هم همینطور.",
+            "خداحافظ": "خداحافظ! امیدوارم دوباره شما را ببینم.",
+            "چند تا روز در هفته داریم؟": "هفت روز در هفته داریم.",
+            "امروز چه روزیه؟": "امروز یک روز عالی است!",
+            // ... اضافه کردن جملات بیشتر تا 200 جمله
+        };
+
+        const chatBox = document.getElementById("chat-box");
+        const userInput = document.getElementById("user-input");
+        const sendButton = document.getElementById("send-button");
+
+        sendButton.addEventListener("click", () => {
+            const userMessage = userInput.value;
+            if (userMessage) {
+                addMessage(userMessage, "user-message");
+                userInput.value = "";
+                const botResponse = responses[userMessage] || "متاسفم، نمی‌توانم به این سوال پاسخ دهم.";
+                addMessage(botResponse, "bot-message");
+            }
+        });
+
+        function addMessage(message, className) {
+            const messageDiv = document.createElement("div");
+            messageDiv.className = className;
+            messageDiv.textContent = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+        }
+    </script>
+</body>
+</html>
